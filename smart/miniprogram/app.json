@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/maps/map",
+    "pages/parks/park",
+    "pages/manis/mani",
+    "pages/users/user",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0094ff",
+    "navigationBarTitleText": "智慧停车",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/maps/map",
+      "text": "地图",
+      "iconPath": "imgs/地图n.png",
+      "selectedIconPath": "imgs/地图.png"
+    },
+    {
+      "pagePath": "pages/parks/park",
+      "text": "停车场",
+      "iconPath": "imgs/停车场n.png",
+      "selectedIconPath": "imgs/停车场.png"
+    },
+    {
+      "pagePath": "pages/manis/mani",
+      "text": "订单",
+      "iconPath": "imgs/订单n.png",
+      "selectedIconPath": "imgs/订单.png"
+    },
+    {
+      "pagePath": "pages/users/user",
+      "text": "用户",
+      "iconPath": "imgs/用户n.png",
+      "selectedIconPath": "imgs/用户.png"
+    }
+  ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

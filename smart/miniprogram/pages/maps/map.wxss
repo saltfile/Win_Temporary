@@ -1,0 +1,11 @@
+/* pages/maps/map.wxss */
+page{
+  padding: 10px;
+  box-sizing: border-box;
+}
+input{
+  border: 1px solid gray;
+}
+
+
+

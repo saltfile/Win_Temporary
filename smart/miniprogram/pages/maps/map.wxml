@@ -1,0 +1,7 @@
+<!--pages/maps/map.wxml-->
+<!-- 缩放就是 scale-->
+<!-- 标记自己的点就是 markers -->
+<map style="height:1100rpx" longitude="{{lg}}" latitude="{{lt}}"
+scale="18 " markers="{{mark}}"></map>
+
+
