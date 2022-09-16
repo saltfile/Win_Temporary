@@ -6,11 +6,20 @@
     "pages/users/user",
     "pages/logs/logs"
   ],
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0094ff",
-    "navigationBarTitleText": "智慧停车",
-    "navigationBarTextStyle": "white"
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "white",
+    "navigationStyle":"custom"
   },
   "tabBar": {
     "list": [{
@@ -20,20 +29,8 @@
       "selectedIconPath": "imgs/地图.png"
     },
     {
-      "pagePath": "pages/parks/park",
-      "text": "停车场",
-      "iconPath": "imgs/停车场n.png",
-      "selectedIconPath": "imgs/停车场.png"
-    },
-    {
-      "pagePath": "pages/manis/mani",
-      "text": "订单",
-      "iconPath": "imgs/订单n.png",
-      "selectedIconPath": "imgs/订单.png"
-    },
-    {
       "pagePath": "pages/users/user",
-      "text": "用户",
+      "text": "我的",
       "iconPath": "imgs/用户n.png",
       "selectedIconPath": "imgs/用户.png"
     }
