@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>proto_buf_demo</artifactId>
+        <groupId>org.example</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>servers_proto</artifactId>
+
+
+    <dependencies>
+       <!--底层的通信组件-->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty-shaded</artifactId>
+            <version>1.42.0</version>
+        </dependency>
+<!--        GRPC对Protobuf的支持工具包-->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>1.42.0</version>
+        </dependency>
+<!--        GRPC处理存根用的-->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <version>1.42.0</version>
+        </dependency>
+<!--        目前用不到的注解API-->
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/annotations-api -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>annotations-api</artifactId>
+            <version>6.0.53</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty-shaded</artifactId>
+            <version>1.42.0</version>
+        </dependency>
+
+    </dependencies>
+<!--    这里放proto插件-->
+<build>
+    <extensions>
+        <extension>
+            <groupId>kr.motd.maven</groupId>
+            <artifactId>os-maven-plugin</artifactId>
+            <version>1.6.2</version>
+        </extension>
+    </extensions>
+    <plugins>
+        <plugin>
+            <groupId>org.xolstice.maven.plugins</groupId>
+            <artifactId>protobuf-maven-plugin</artifactId>
+            <version>0.6.1</version>
+            <extensions>true</extensions>
+            <configuration>
+                <!-- 工具版本 -->
+                <protocArtifact>com.google.protobuf:protoc:3.17.3:exe:${os.detected.classifier}</protocArtifact>
+                <pluginId>grpc-java</pluginId>
+                <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.42.0:exe:${os.detected.classifier}</pluginArtifact>
+
+            </configuration>
+            <executions>
+                <execution>
+                    <!--在执行mvn compile的时候会执行以下操作-->
+                    <phase>compile</phase>
+                    <goals>
+                        <!--生成OuterClass类-->
+                        <goal>compile</goal>
+                        <!--生成Grpc类-->
+                        <goal>compile-custom</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+
+
+
+
+
+
+
+
+
+</build>
+
+
+
+</project>
