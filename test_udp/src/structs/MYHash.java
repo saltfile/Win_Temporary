@@ -203,7 +203,11 @@ public class MYHash {
         System.out.println(map_open.get("Aa"));
 
         //合并散列：将上两种散列表给合并起来，简化查询的一种操作
+        HashMerag<String,String> map_merga = new HashMerag<>();
 
+        map_merga.put(key1,"火花");
+        map_merga.put(key2,"adsa");
+        System.out.println(map_merga.get("Aa"));
 
 
     }
