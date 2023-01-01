@@ -16,7 +16,7 @@ public class Serverdemo {
 
         socket.receive(packet);
 
-        
+
         System.out.println(new String(packet.getData()));
         socket.close();
     }

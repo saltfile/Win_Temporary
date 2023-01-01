@@ -15,7 +15,7 @@ service getRegionMeta {
 
 }
 
-message Pers{
+message Pers {
     string message = 1;
     int64 age = 2;
 }
@@ -24,7 +24,7 @@ message Pers{
 
 // 方法反馈对象
 message regionMeta {
-    bytes metaByte=1;
+    bytes metaByte = 1;
 }
 
 

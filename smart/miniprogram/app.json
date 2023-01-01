@@ -19,22 +19,23 @@
     "navigationBarBackgroundColor": "#0094ff",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "white",
-    "navigationStyle":"custom"
+    "navigationStyle": "custom"
   },
   "tabBar": {
-    "list": [{
-      "pagePath": "pages/maps/map",
-      "text": "地图",
-      "iconPath": "imgs/地图n.png",
-      "selectedIconPath": "imgs/地图.png"
-    },
-    {
-      "pagePath": "pages/users/user",
-      "text": "我的",
-      "iconPath": "imgs/用户n.png",
-      "selectedIconPath": "imgs/用户.png"
-    }
-  ]
+    "list": [
+      {
+        "pagePath": "pages/maps/map",
+        "text": "地图",
+        "iconPath": "imgs/地图n.png",
+        "selectedIconPath": "imgs/地图.png"
+      },
+      {
+        "pagePath": "pages/users/user",
+        "text": "我的",
+        "iconPath": "imgs/用户n.png",
+        "selectedIconPath": "imgs/用户.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

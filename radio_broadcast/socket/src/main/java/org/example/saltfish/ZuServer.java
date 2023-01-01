@@ -15,21 +15,21 @@ public class ZuServer {
         try {
             mss = new MulticastSocket(port);
             mss.joinGroup(group);
-            System.out.println("发送数据包启动！（启动时间"+new Date()+")");
+            System.out.println("发送数据包启动！（启动时间" + new Date() + ")");
 
-            while(true){
-                String message = "Hello "+new Date();
+            while (true) {
+                String message = "Hello " + new Date();
                 byte[] buffer = message.getBytes();
-                DatagramPacket dp = new DatagramPacket(buffer, buffer.length,group,port);
+                DatagramPacket dp = new DatagramPacket(buffer, buffer.length, group, port);
                 mss.send(dp);
-                System.out.println("发送数据包给 "+group+":"+port);
+                System.out.println("发送数据包给 " + group + ":" + port);
                 TimeUnit.SECONDS.sleep(3);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
-                if(mss!=null){
+                if (mss != null) {
                     mss.leaveGroup(group);
                     mss.close();
                 }

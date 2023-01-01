@@ -43,10 +43,10 @@ interface IInitCloudConfig {
     env?:
         | string
         | {
-              database?: string
-              functions?: string
-              storage?: string
-          }
+        database?: string
+        functions?: string
+        storage?: string
+    }
     traceUser?: boolean
 }
 
@@ -57,6 +57,7 @@ interface ICloudConfig {
 
 interface IICloudAPI {
     init: (config?: IInitCloudConfig) => void
+
     [api: string]: AnyFunction | IAPIFunction<any, any>
 }
 
@@ -74,7 +75,8 @@ interface ICloudMetaData {
     session_id: string
 }
 
-declare class InternalSymbol {}
+declare class InternalSymbol {
+}
 
 interface AnyObject {
     [x: string]: any
@@ -91,11 +93,13 @@ interface WxCloud {
     init: (config?: ICloudConfig) => void
 
     callFunction(param: OQ<ICloud.CallFunctionParam>): void
+
     callFunction(
         param: RQ<ICloud.CallFunctionParam>
     ): Promise<ICloud.CallFunctionResult>
 
     uploadFile(param: OQ<ICloud.UploadFileParam>): WechatMiniprogram.UploadTask
+
     uploadFile(
         param: RQ<ICloud.UploadFileParam>
     ): Promise<ICloud.UploadFileResult>
@@ -103,16 +107,19 @@ interface WxCloud {
     downloadFile(
         param: OQ<ICloud.DownloadFileParam>
     ): WechatMiniprogram.DownloadTask
+
     downloadFile(
         param: RQ<ICloud.DownloadFileParam>
     ): Promise<ICloud.DownloadFileResult>
 
     getTempFileURL(param: OQ<ICloud.GetTempFileURLParam>): void
+
     getTempFileURL(
         param: RQ<ICloud.GetTempFileURLParam>
     ): Promise<ICloud.GetTempFileURLResult>
 
     deleteFile(param: OQ<ICloud.DeleteFileParam>): void
+
     deleteFile(
         param: RQ<ICloud.DeleteFileParam>
     ): Promise<ICloud.DeleteFileResult>
@@ -123,11 +130,13 @@ interface WxCloud {
     CDN: ICloud.ICDNConstructor
 
     callContainer(param: OQ<ICloud.CallContainerParam>): void
+
     callContainer(
         param: RQ<ICloud.CallContainerParam>
     ): Promise<ICloud.CallContainerResult>
 
     connectContainer(param: OQ<ICloud.ConnectContainerParam>): void
+
     connectContainer(
         param: RQ<ICloud.ConnectContainerParam>
     ): Promise<ICloud.ConnectContainerResult>
@@ -150,6 +159,7 @@ declare namespace ICloud {
         data?: CallFunctionData
         slow?: boolean
     }
+
     // === end ===
 
     // === API: container ===
@@ -187,14 +197,12 @@ declare namespace ICloud {
         timeout?: number
     }
 
-    type ConnectContainerParam = Omit<
-        ConnectSocketOptions,
-        'success' | 'fail' | 'complete'
-    > &
+    type ConnectContainerParam = Omit<ConnectSocketOptions,
+        'success' | 'fail' | 'complete'> &
         ICloudAPIParam<ConnectContainerResult> & {
-            service: string
-            path?: string
-        }
+        service: string
+        path?: string
+    }
     // === end ===
 
     // === API: uploadFile ===
@@ -208,6 +216,7 @@ declare namespace ICloud {
         filePath: string
         header?: AnyObject
     }
+
     // === end ===
 
     // === API: downloadFile ===
@@ -220,6 +229,7 @@ declare namespace ICloud {
         fileID: string
         cloudPath?: string
     }
+
     // === end ===
 
     // === API: getTempFileURL ===
@@ -238,6 +248,7 @@ declare namespace ICloud {
     interface GetTempFileURLParam extends ICloudAPIParam<GetTempFileURLResult> {
         fileList: string[]
     }
+
     // === end ===
 
     // === API: deleteFile ===
@@ -254,6 +265,7 @@ declare namespace ICloud {
     interface DeleteFileParam extends ICloudAPIParam<DeleteFileResult> {
         fileList: string[]
     }
+
     // === end ===
 
     // === API: CloudID ===
@@ -262,14 +274,17 @@ declare namespace ICloud {
     }
 
     interface ICloudIDConstructor {
-        new (cloudId: string): CloudID
+        new(cloudId: string): CloudID
+
         (cloudId: string): CloudID
     }
+
     // === end ===
 
     // === API: CDN ===
     abstract class CDN {
         target: string | ArrayBuffer | ICDNFilePathSpec
+
         constructor(target: string | ArrayBuffer | ICDNFilePathSpec)
     }
 
@@ -279,9 +294,11 @@ declare namespace ICloud {
     }
 
     interface ICDNConstructor {
-        new (options: string | ArrayBuffer | ICDNFilePathSpec): CDN
+        new(options: string | ArrayBuffer | ICDNFilePathSpec): CDN
+
         (options: string | ArrayBuffer | ICDNFilePathSpec): CDN
     }
+
     // === end ===
 }
 
@@ -364,16 +381,25 @@ declare namespace DB {
 
     interface DatabaseCommand {
         eq(val: any): DatabaseQueryCommand
+
         neq(val: any): DatabaseQueryCommand
+
         gt(val: any): DatabaseQueryCommand
+
         gte(val: any): DatabaseQueryCommand
+
         lt(val: any): DatabaseQueryCommand
+
         lte(val: any): DatabaseQueryCommand
+
         in(val: any[]): DatabaseQueryCommand
+
         nin(val: any[]): DatabaseQueryCommand
 
         geoNear(options: IGeoNearCommandOptions): DatabaseQueryCommand
+
         geoWithin(options: IGeoWithinCommandOptions): DatabaseQueryCommand
+
         geoIntersects(
             options: IGeoIntersectsCommandOptions
         ): DatabaseQueryCommand
@@ -381,12 +407,15 @@ declare namespace DB {
         and(
             ...expressions: Array<DatabaseLogicCommand | IQueryCondition>
         ): DatabaseLogicCommand
+
         or(
             ...expressions: Array<DatabaseLogicCommand | IQueryCondition>
         ): DatabaseLogicCommand
+
         nor(
             ...expressions: Array<DatabaseLogicCommand | IQueryCondition>
         ): DatabaseLogicCommand
+
         not(expression: DatabaseLogicCommand): DatabaseLogicCommand
 
         exists(val: boolean): DatabaseQueryCommand
@@ -394,24 +423,39 @@ declare namespace DB {
         mod(divisor: number, remainder: number): DatabaseQueryCommand
 
         all(val: any[]): DatabaseQueryCommand
+
         elemMatch(val: any): DatabaseQueryCommand
+
         size(val: number): DatabaseQueryCommand
 
         set(val: any): DatabaseUpdateCommand
+
         remove(): DatabaseUpdateCommand
+
         inc(val: number): DatabaseUpdateCommand
+
         mul(val: number): DatabaseUpdateCommand
+
         min(val: number): DatabaseUpdateCommand
+
         max(val: number): DatabaseUpdateCommand
+
         rename(val: string): DatabaseUpdateCommand
+
         bit(val: number): DatabaseUpdateCommand
 
         push(...values: any[]): DatabaseUpdateCommand
+
         pop(): DatabaseUpdateCommand
+
         shift(): DatabaseUpdateCommand
+
         unshift(...values: any[]): DatabaseUpdateCommand
+
         addToSet(val: any): DatabaseUpdateCommand
+
         pull(val: any): DatabaseUpdateCommand
+
         pullAll(val: any): DatabaseUpdateCommand
 
         project: {
@@ -530,7 +574,8 @@ declare namespace DB {
         }
     }
 
-    class DatabaseAggregateCommand {}
+    class DatabaseAggregateCommand {
+    }
 
     enum LOGIC_COMMANDS_LITERAL {
         AND = 'and',
@@ -541,8 +586,11 @@ declare namespace DB {
 
     class DatabaseLogicCommand {
         and(...expressions: DatabaseLogicCommand[]): DatabaseLogicCommand
+
         or(...expressions: DatabaseLogicCommand[]): DatabaseLogicCommand
+
         nor(...expressions: DatabaseLogicCommand[]): DatabaseLogicCommand
+
         not(expression: DatabaseLogicCommand): DatabaseLogicCommand
     }
 
@@ -572,12 +620,19 @@ declare namespace DB {
 
     class DatabaseQueryCommand extends DatabaseLogicCommand {
         eq(val: any): DatabaseLogicCommand
+
         neq(val: any): DatabaseLogicCommand
+
         gt(val: any): DatabaseLogicCommand
+
         gte(val: any): DatabaseLogicCommand
+
         lt(val: any): DatabaseLogicCommand
+
         lte(val: any): DatabaseLogicCommand
+
         in(val: any[]): DatabaseLogicCommand
+
         nin(val: any[]): DatabaseLogicCommand
 
         exists(val: boolean): DatabaseLogicCommand
@@ -585,11 +640,15 @@ declare namespace DB {
         mod(divisor: number, remainder: number): DatabaseLogicCommand
 
         all(val: any[]): DatabaseLogicCommand
+
         elemMatch(val: any): DatabaseLogicCommand
+
         size(val: number): DatabaseLogicCommand
 
         geoNear(options: IGeoNearCommandOptions): DatabaseLogicCommand
+
         geoWithin(options: IGeoWithinCommandOptions): DatabaseLogicCommand
+
         geoIntersects(
             options: IGeoIntersectsCommandOptions
         ): DatabaseLogicCommand
@@ -599,7 +658,8 @@ declare namespace DB {
         SLICE = 'slice'
     }
 
-    class DatabaseProjectionCommand {}
+    class DatabaseProjectionCommand {
+    }
 
     enum UPDATE_COMMANDS_LITERAL {
         // field
@@ -622,19 +682,19 @@ declare namespace DB {
         PULL_ALL = 'pullAll'
     }
 
-    class DatabaseUpdateCommand {}
+    class DatabaseUpdateCommand {
+    }
 
-    class Batch {}
+    class Batch {
+    }
 
     /**
      * A contract that all API provider must adhere to
      */
-    class APIBaseContract<
-        PromiseReturn,
+    class APIBaseContract<PromiseReturn,
         CallbackReturn,
         Param extends IAPIParam,
-        Context = any
-    > {
+        Context = any> {
         getContext(param: Param): Context
 
         /**
@@ -648,38 +708,46 @@ declare namespace DB {
     }
 
     interface IGeoPointConstructor {
-        new (longitude: number, latitide: number): GeoPoint
-        new (geojson: IGeoJSONPoint): GeoPoint
+        new(longitude: number, latitide: number): GeoPoint
+
+        new(geojson: IGeoJSONPoint): GeoPoint
+
         (longitude: number, latitide: number): GeoPoint
+
         (geojson: IGeoJSONPoint): GeoPoint
     }
 
     interface IGeoMultiPointConstructor {
-        new (points: GeoPoint[] | IGeoJSONMultiPoint): GeoMultiPoint
+        new(points: GeoPoint[] | IGeoJSONMultiPoint): GeoMultiPoint
+
         (points: GeoPoint[] | IGeoJSONMultiPoint): GeoMultiPoint
     }
 
     interface IGeoLineStringConstructor {
-        new (points: GeoPoint[] | IGeoJSONLineString): GeoLineString
+        new(points: GeoPoint[] | IGeoJSONLineString): GeoLineString
+
         (points: GeoPoint[] | IGeoJSONLineString): GeoLineString
     }
 
     interface IGeoMultiLineStringConstructor {
-        new (
+        new(
             lineStrings: GeoLineString[] | IGeoJSONMultiLineString
         ): GeoMultiLineString
+
         (
             lineStrings: GeoLineString[] | IGeoJSONMultiLineString
         ): GeoMultiLineString
     }
 
     interface IGeoPolygonConstructor {
-        new (lineStrings: GeoLineString[] | IGeoJSONPolygon): GeoPolygon
+        new(lineStrings: GeoLineString[] | IGeoJSONPolygon): GeoPolygon
+
         (lineStrings: GeoLineString[] | IGeoJSONPolygon): GeoPolygon
     }
 
     interface IGeoMultiPolygonConstructor {
-        new (polygons: GeoPolygon[] | IGeoJSONMultiPolygon): GeoMultiPolygon
+        new(polygons: GeoPolygon[] | IGeoJSONMultiPolygon): GeoMultiPolygon
+
         (polygons: GeoPolygon[] | IGeoJSONMultiPolygon): GeoMultiPolygon
     }
 
@@ -737,6 +805,7 @@ declare namespace DB {
         constructor(longitude: number, latitude: number)
 
         toJSON(): Record<string, any>
+
         toString(): string
     }
 
@@ -746,6 +815,7 @@ declare namespace DB {
         constructor(points: GeoPoint[])
 
         toJSON(): IGeoJSONMultiPoint
+
         toString(): string
     }
 
@@ -755,6 +825,7 @@ declare namespace DB {
         constructor(points: GeoPoint[])
 
         toJSON(): IGeoJSONLineString
+
         toString(): string
     }
 
@@ -764,6 +835,7 @@ declare namespace DB {
         constructor(lines: GeoLineString[])
 
         toJSON(): IGeoJSONMultiLineString
+
         toString(): string
     }
 
@@ -773,6 +845,7 @@ declare namespace DB {
         constructor(lines: GeoLineString[])
 
         toJSON(): IGeoJSONPolygon
+
         toString(): string
     }
 
@@ -782,6 +855,7 @@ declare namespace DB {
         constructor(polygons: GeoPolygon[])
 
         toJSON(): IGeoJSONMultiPolygon
+
         toString(): string
     }
 
@@ -819,6 +893,7 @@ declare namespace DB {
 
     abstract class ServerDate {
         readonly options: IServerDateOptions
+
         constructor(options?: IServerDateOptions)
     }
 
@@ -828,13 +903,15 @@ declare namespace DB {
     }
 
     interface IRegExpConstructor {
-        new (options: IRegExpOptions): RegExp
+        new(options: IRegExpOptions): RegExp
+
         (options: IRegExpOptions): RegExp
     }
 
     abstract class RegExp {
         readonly regexp: string
         readonly options: string
+
         constructor(options: IRegExpOptions)
     }
 
@@ -842,6 +919,7 @@ declare namespace DB {
 
     interface IDocumentData {
         _id?: DocumentId
+
         [key: string]: any
     }
 
@@ -959,11 +1037,7 @@ declare namespace DB {
 
 type Optional<T> = { [K in keyof T]+?: T[K] }
 
-type OQ<
-    T extends Optional<
-        Record<'complete' | 'success' | 'fail', (...args: any[]) => any>
-    >
-> =
+type OQ<T extends Optional<Record<'complete' | 'success' | 'fail', (...args: any[]) => any>>> =
     | (RQ<T> & Required<Pick<T, 'success'>>)
     | (RQ<T> & Required<Pick<T, 'fail'>>)
     | (RQ<T> & Required<Pick<T, 'complete'>>)
@@ -972,8 +1046,4 @@ type OQ<
     | (RQ<T> & Required<Pick<T, 'fail' | 'complete'>>)
     | (RQ<T> & Required<Pick<T, 'fail' | 'complete' | 'success'>>)
 
-type RQ<
-    T extends Optional<
-        Record<'complete' | 'success' | 'fail', (...args: any[]) => any>
-    >
-> = Pick<T, Exclude<keyof T, 'complete' | 'success' | 'fail'>>
+type RQ<T extends Optional<Record<'complete' | 'success' | 'fail', (...args: any[]) => any>>> = Pick<T, Exclude<keyof T, 'complete' | 'success' | 'fail'>>

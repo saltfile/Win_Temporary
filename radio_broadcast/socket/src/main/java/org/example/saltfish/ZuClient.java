@@ -18,19 +18,19 @@ public class ZuClient {
             //加入连接
             msr.joinGroup(group);
             byte[] buffer = new byte[8192];
-            System.out.println("接收数据包启动！(启动时间: "+new Date()+")");
-            while(true){
+            System.out.println("接收数据包启动！(启动时间: " + new Date() + ")");
+            while (true) {
                 //建立一个指定缓冲区大小的数据包
                 DatagramPacket dp = new DatagramPacket(buffer, buffer.length);
                 msr.receive(dp);
-                String s = new String(dp.getData(),0,dp.getLength());
+                String s = new String(dp.getData(), 0, dp.getLength());
                 //解码组播数据包
                 System.out.println(s);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
-            if(msr!=null){
+        } finally {
+            if (msr != null) {
                 try {
                     msr.leaveGroup(group);
                     msr.close();
